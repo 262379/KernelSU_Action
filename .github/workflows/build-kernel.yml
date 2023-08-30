@@ -118,7 +118,6 @@ jobs:
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
             rm -rf ./KernelSU
             rm -rf ./drivers/kernelsu
-	    
     - name: Setup KernelSU
       if: env.ENABLE_KERNELSU == 'true'
       run: |
