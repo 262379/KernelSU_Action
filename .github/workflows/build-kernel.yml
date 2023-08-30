@@ -113,13 +113,16 @@ jobs:
             echo "FORMAT_MKBOOTING=$(echo `tools/unpack_bootimg.py --boot_img=boot-source.img --format mkbootimg`)" >> $GITHUB_ENV
             echo "HAVE_SOURCE_BOOT_IMAGE=true" >> $GITHUB_ENV
         fi
-  
+    - name: clean KernelSU
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+            rm -rf ./KernelSU
+            rm -rf ./drivers/kernelsu
+	    
     - name: Setup KernelSU
       if: env.ENABLE_KERNELSU == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-        rm -rf ./KernelSU
-        rm -rf ./drivers/kernelsu
         if [ ${{ env.KERNELSU_TAG }} = stable ]; then
            curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" 
            echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
