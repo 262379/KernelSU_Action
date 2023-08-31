@@ -116,11 +116,15 @@ jobs:
     - name: clean KernelSU
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
-            make mrproper
+            rm -rf ./KernelSU
+            rm -rf ./drivers/kernelsu
+            
     - name: Setup KernelSU
       if: env.ENABLE_KERNELSU == 'true'
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+            make mrproper
+            make clean
         if [ ${{ env.KERNELSU_TAG }} = stable ]; then
            curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" 
            echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
