@@ -126,7 +126,7 @@ jobs:
             make mrproper
             make clean
         if [ ${{ env.KERNELSU_TAG }} = stable ]; then
-           curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" 
+           curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s main 
            echo "UPLOADNAME=-KernelSU" >> $GITHUB_ENV
         else
            curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -s ${{ env.KERNELSU_TAG }}
